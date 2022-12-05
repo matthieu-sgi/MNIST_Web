@@ -2,12 +2,14 @@
 from __future__ import annotations
 
 from torch.nn import CrossEntropyLoss, Linear, Flatten, Conv2d , MaxPool2d, Module, ReLU
-from torchvision import transforms as T
-from torchvision.datasets import MNIST
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
+from torchvision import transforms as T
+from torchvision.datasets import MNIST
+
 
 import torch
+
 
 class MNISTDataset:
     """MNIST Dataset with loaders for training and testing"""
@@ -28,6 +30,7 @@ class MNISTDataset:
             self.test_dataset, batch_size=self.batch_size, shuffle=False, num_workers=self.num_workers,pin_memory = self.pin_memory
         )
 
+
 class MNISTModel(Module):
     """Mnist model with 2 convolutional layers and 3 linear layers"""
     def __init__(self) -> None:
@@ -40,7 +43,6 @@ class MNISTModel(Module):
         self.linear1 = Linear(4096, 256)
         self.linear2 = Linear(256, 128)
         self.linear3 = Linear(128, 10)
-    
 
     def forward(self, x) -> torch.Tensor:
         """Forward pass of the model"""
